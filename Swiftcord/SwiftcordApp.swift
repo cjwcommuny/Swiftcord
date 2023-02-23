@@ -21,9 +21,6 @@ struct SwiftcordApp: App {
 	internal static let legacyTokenKeychainKey = "authToken"
 
 	// let persistenceController = PersistenceController.shared
-	#if !APP_STORE
-	@StateObject var updaterViewModel = UpdaterViewModel()
-	#endif
 	@StateObject private var gateway = DiscordGateway()
 	@StateObject private var restAPI = DiscordREST()
 	@StateObject private var state = UIState()
@@ -85,11 +82,11 @@ struct SwiftcordApp: App {
 			}
 		}
 		.commands {
-			#if !APP_STORE
-			CommandGroup(after: .appInfo) {
-				CheckForUpdatesView(updaterViewModel: updaterViewModel)
-			}
-			#endif
+//			#if !APP_STORE
+//			CommandGroup(after: .appInfo) {
+//				CheckForUpdatesView(updaterViewModel: updaterViewModel)
+//			}
+//			#endif
 
 			SidebarCommands()
 			NavigationCommands(state: state, gateway: gateway)
